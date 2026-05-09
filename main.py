@@ -31,8 +31,11 @@ class Player(GameSprite):
 class Ball(GameSprite):
     def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed):
         super().__init__(player_image, player_x, player_y, size_x, size_y, player_speed)
-        self.speed_x = player_speed
-        self.speed_y = player_speed
+        direction_x = 1 if randint(0, 1) == 1 else -1
+        direction_y = 1 if randint(0, 1) == 1 else -1
+        
+        self.speed_x = player_speed * direction_x
+        self.speed_y = player_speed * direction_y
         self.coef_x = 1
         self.coef_y = 1
     def update(self):
@@ -61,7 +64,7 @@ background = transform.scale(
 
 player_left = Player("racket.png", 30, 10, 48, 130, 10)
 player_right = Player("racket.png", win_w - 30 - 48 , win_h - 10 - 130, 48, 130, 10)
-ball = Ball("ball.png", win_w / 2 + 20, win_h / 2 - 20, 50, 50 , 4)
+ball = Ball("ball.png", randint(200, win_w - 200), randint(200, win_h - 200), 50, 50 , 4)
 
 font.init()
 font_text = font.Font(None, 72)
